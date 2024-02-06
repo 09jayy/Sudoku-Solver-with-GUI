@@ -1,6 +1,6 @@
 import customtkinter as ctk
-import solveSudoku as solveSudoku
-import tkinter as tk
+import solveSudoku 
+from tkinter import Canvas
 import time
 import copy
 
@@ -10,15 +10,15 @@ FONT_BOLD = ("Calibri bold",16)
 
 # SUBROUTINES
 def placeCol(master,col,row):
-    canvas = tk.Canvas(master,width=5,height=75,bg="black", highlightthickness=0)
+    canvas = Canvas(master,width=5,height=75,bg="black", highlightthickness=0)
     canvas.grid(column=col,row=row)
 
 def placeRow(master,row,col):
-    canvas = tk.Canvas(master,width=75,height=5,bg="black", highlightthickness=0)
+    canvas = Canvas(master,width=75,height=5,bg="black", highlightthickness=0)
     canvas.grid(column=col,row=row,rowspan=1)
 
 def fillGap(master,row,col):
-    canvas = tk.Canvas(master,width=5,height=5,bg="black", highlightthickness=0)
+    canvas = Canvas(master,width=5,height=5,bg="black", highlightthickness=0)
     canvas.grid(column=col,row=row)
 
 # CLASSES

@@ -3,6 +3,7 @@ import copy
 
 PUZZLE_NUM = 1
 
+# VALIDATION FUNCTIONS
 def getCorner(row: int, col: int) -> (int,int):
     cornerCoord = lambda x : x // 3 * 3 
     return cornerCoord(row), cornerCoord(col)
@@ -48,6 +49,15 @@ def checkValidForInput(puzzle: list[list[int]], row: int, col: int) -> bool:
     
     return True
 
+def checkInputValid(puzzle: list[list[int]]) -> bool:
+    for rowNum,row in enumerate(puzzle):
+        for colNum,num in enumerate(row): 
+            if num != 0:
+                if checkValidForInput(puzzle,rowNum,colNum) == False or num > 9 or num < 0:
+                    return False
+    return True
+
+# MOVEMENT FUNCTIONS
 def increment(row: int,col: int) -> (int,int):
     col += 1
     if (col > 8):
@@ -93,7 +103,7 @@ def findValidBackSpace(row,col,puzzle,zeroPuzzle):
             validBackSpace = False  
     return row,col,curVal
 
-
+# MAIN SOLVING FUNCTION
 def solveSudoku(puzzle: list[list[int]]) -> None:
     zeroPuzzle = copy.deepcopy(puzzle)
     curVal: int = 1
@@ -101,7 +111,6 @@ def solveSudoku(puzzle: list[list[int]]) -> None:
     calNum: int = 0 # counts number of calculations
     col: int = 0 # point to num in row
     row: int = 0 # point to row
-    validBackSpace: bool = False
 
     # go to first index which is zero
     if puzzle[row][col] != 0: row,col = goForward(row,col,zeroPuzzle)
@@ -113,25 +122,17 @@ def solveSudoku(puzzle: list[list[int]]) -> None:
             puzzle[row][col] = curVal
             curVal = 1
             row,col = goForward(row,col,zeroPuzzle)
+            solved = True if (row == 9 and col == 0) else False
         else:
             if (curVal >= 9):
                 row,col,curVal = findValidBackSpace(row,col,puzzle,zeroPuzzle)
             else:
                 curVal += 1
-        if (row == 9 and col == 0): solved = True
         
         calNum += 1
         if (calNum > 900_000): raise Exception("ERROR: Time limit exceeded")
 
     return puzzle,calNum
-
-def checkInputValid(puzzle: list[list[int]]) -> bool:
-    for rowNum,row in enumerate(puzzle):
-        for colNum,num in enumerate(row): 
-            if num != 0:
-                if checkValidForInput(puzzle,rowNum,colNum) == False or num > 9 or num < 0:
-                    return False
-    return True 
 
 def main():
     if PUZZLE_NUM == 1:
@@ -181,16 +182,4 @@ def main():
 
 
 if __name__ == "__main__":
-    #main()
-    puzzle = [
-            [0,7,0,0,0,6,0,0,5],
-            [0,4,0,8,0,0,0,0,0],
-            [8,0,5,0,0,1,0,3,0],
-            [9,0,6,1,0,0,0,0,4],
-            [0,0,0,0,0,3,2,0,0],
-            [0,8,0,0,0,0,0,0,0],
-            [5,0,1,9,0,0,0,0,6],
-            [0,0,7,0,0,0,0,0,0],
-            [0,0,0,0,6,0,0,4,0]
-        ]
-    print(checkInputValid(puzzle))
+    main()
