@@ -159,6 +159,7 @@ class App(ctk.CTk):
 
 # MAIN
 def main():
+    ctk.deactivate_automatic_dpi_awareness()
     ctk.set_appearance_mode("dark")
     ctk.set_default_color_theme("dark-blue")
     app = App()
