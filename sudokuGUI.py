@@ -1,5 +1,5 @@
 import customtkinter as ctk
-import finalSolveSudoku as solveSudoku
+import solveSudoku as solveSudoku
 import tkinter as tk
 import time
 import copy
