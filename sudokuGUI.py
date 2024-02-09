@@ -7,6 +7,9 @@ import copy
 # CONSTANTS
 FONT = ("Helvetica",14)
 FONT_BOLD = ("Calibri bold",16)
+# SCALING
+WINDOW_DIM = "1510x880"
+
 
 # SUBROUTINES
 def placeCol(master,col,row):
@@ -15,7 +18,7 @@ def placeCol(master,col,row):
 
 def placeRow(master,row,col):
     canvas = Canvas(master,width=75,height=5,bg="black", highlightthickness=0)
-    canvas.grid(column=col,row=row,rowspan=1)
+    canvas.grid(column=col,row=row)
 
 def fillGap(master,row,col):
     canvas = Canvas(master,width=5,height=5,bg="black", highlightthickness=0)
@@ -114,6 +117,11 @@ class SudokuGrid(ctk.CTkFrame):
             status.configure(text="Invalid Input - Unsolvable Puzzle")
             calculations.configure(text="")
             answerGrid.newSolve(puzzle)
+    
+    def clearPuzzle(self):
+        for entry_row in self.entries:
+            for entry in entry_row:
+                entry.delete(0,"end")
 
 class Blank(ctk.CTkFrame):
     def __init__(self,master):
@@ -135,6 +143,8 @@ class MainFrame(ctk.CTkFrame):
         # Empty label
         self.empty1 = ctk.CTkLabel(self, text="")
         self.empty1.grid(column=1,row=11)
+        self.empty2 = ctk.CTkLabel(self, text="")
+        self.empty2.grid(column=1,row=13)
 
         # Status labels
         self.status = ctk.CTkLabel(master=self,text="",width=50,font=FONT_BOLD)
@@ -147,21 +157,23 @@ class MainFrame(ctk.CTkFrame):
         self.submit = ctk.CTkButton(master=self, text="Solve", width = 150, font=FONT_BOLD,command=lambda: self.sudokuGrid.solvePuzzle(self.answerGrid,self.status,self.calculations))
         self.submit.grid(column=1, row=12)
 
+        # Clear button
+        self.clear = ctk.CTkButton(master=self, text="Clear", width = 150, font=FONT,command=lambda: self.sudokuGrid.clearPuzzle())
+        self.clear.grid(column=1, row=14)
+
 # MAIN APP CLASS
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.geometry("1510x880")
+        self.geometry(WINDOW_DIM)
         self.title("SUDOKU SOLVER - BY JAYツ")
-        self.resizable(False,False)
-
         self.frame = MainFrame(self)
 
 # MAIN
 def main():
-    ctk.deactivate_automatic_dpi_awareness()
     ctk.set_appearance_mode("dark")
     ctk.set_default_color_theme("dark-blue")
+    ctk.deactivate_automatic_dpi_awareness()
     app = App()
     app.iconbitmap("sudokuIcon.ico")
     app.mainloop()
