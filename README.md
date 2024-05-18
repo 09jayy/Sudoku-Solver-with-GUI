@@ -46,3 +46,7 @@ The overall structure of the app follows the object-oriented structure recommend
 ## Potential Improvements
 
 - Backtracking Algorithm - considering heuristics for faster completion
+
+## Preview
+
+![Screenshot of sudoku solver puzzle solved](https://github.com/09jayy/09jayy/blob/main/assets/Sudoku-Solver-with-GUI/solved-puzzle-screenshot.png?raw=true)
