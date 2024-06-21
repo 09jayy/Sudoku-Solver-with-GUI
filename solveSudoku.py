@@ -1,10 +1,10 @@
 import time
 import copy
 
-PUZZLE_NUM = 1
+PUZZLE_NUM = 4
 
 # VALIDATION FUNCTIONS
-def getCorner(row: int, col: int) -> (int,int):
+def getCorner(row: int, col: int) -> tuple[int,int]:
     cornerCoord = lambda x : x // 3 * 3 
     return cornerCoord(row), cornerCoord(col)
 
@@ -58,7 +58,7 @@ def checkInputValid(puzzle: list[list[int]]) -> bool:
     return True
 
 # MOVEMENT FUNCTIONS
-def increment(row: int,col: int) -> (int,int):
+def increment(row: int,col: int) -> tuple[int,int]:
     col += 1
     if (col > 8):
         row += 1
@@ -66,7 +66,7 @@ def increment(row: int,col: int) -> (int,int):
 
     return row,col
 
-def reduce(row: int, col: int) -> (int,int):
+def reduce(row: int, col: int) -> tuple[int,int]:
     col -= 1
     if (col < 0):
         row -= 1
@@ -74,7 +74,7 @@ def reduce(row: int, col: int) -> (int,int):
 
     return row,col
 
-def goForward(row: int, col: int, zeroPuzzle: list[list[int]]) -> (int,int):
+def goForward(row: int, col: int, zeroPuzzle: list[list[int]]) -> tuple[int,int]: 
     valid: bool = False
     while not valid:
         row,col = increment(row,col)
@@ -82,7 +82,7 @@ def goForward(row: int, col: int, zeroPuzzle: list[list[int]]) -> (int,int):
     
     return row,col
 
-def goBack(row: int, col: int, zeroPuzzle: list[list[int]]) -> (int,int):
+def goBack(row: int, col: int, zeroPuzzle: list[list[int]]) -> tuple[int,int]:
     valid: bool = False
     while not valid:
         row,col = reduce(row,col)
@@ -159,7 +159,7 @@ def main():
             [7,0,0,0,0,0,0,4,0],
             [0,3,5,0,0,0,6,0,0]
         ]
-    else:
+    elif PUZZLE_NUM == 3:
         puzzle = [
             [0,7,0,0,0,6,0,0,5],
             [0,4,0,8,0,0,0,0,0],
@@ -170,6 +170,18 @@ def main():
             [5,0,1,9,0,0,0,0,6],
             [0,0,7,0,0,0,0,0,0],
             [0,0,0,0,6,0,0,4,0]
+        ]
+    else:
+        puzzle = [
+            [5,3,0,0,7,0,0,0,0],
+            [6,0,0,1,9,5,0,0,0],
+            [0,9,8,0,0,0,0,6,0],
+            [8,0,0,0,6,0,0,0,3],
+            [4,0,0,8,0,3,0,0,1],
+            [7,0,0,0,2,0,0,0,6],
+            [0,6,0,0,0,0,2,8,0],
+            [0,0,0,4,1,9,0,0,5],
+            [0,0,0,0,8,0,0,7,9]
         ]
 
     startTime: time = time.time()
