@@ -15,7 +15,23 @@ This program was built to solve sudoku problems. Allows the user to input the su
 
 ## Installation
 
-TODO // install instructions and running .exe file
+### Using pyinstaller
+
+#### 1. Install pyinstaller
+
+```
+pip install pyinstaller
+```
+
+#### 2. Generate .exe
+
+In the main.py directory run
+
+```
+pyinstaller --onefile --windowed --icon=sudokuIcon.ico --add-data "sudokuIcon.ico;." main.py
+```
+
+In the `/dist` folder will be the `main.exe` - May need to manually move the solveSudoku.ico file into the `/dist` folder for .exe to run
 
 ## Program Structure
 
