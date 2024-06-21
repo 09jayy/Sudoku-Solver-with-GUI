@@ -36,7 +36,7 @@ In the `/dist` folder will be the `main.exe` - May need to manually move the sol
 ## Program Structure
 
 - [_solveSudoku.py_](solveSudoku.py) : contains subroutines for the logic of solving a sudoku puzzle.
-- [_sudokuGUI.py_](sudokuGUI.py) : contains the app and classes
+- [_main.py_](main.py) : contains the app and classes
 
 ### Modules
 
