@@ -13,25 +13,21 @@
 
 This program was built to solve sudoku problems. Allows the user to input the sudoku puzzle in a generated grid which can be solved in <1 second. The output includes the solved puzzle (indicating which values are solved values and ones that are given) as well as the time taken for the computer to solve and the number of calculations that were required.
 
-## Installation
+## Run Program
 
-### Using pyinstaller
+Pip install dependencies
 
-#### 1. Install pyinstaller
-
-```
-pip install pyinstaller
+```sh
+pip install customtkinter
 ```
 
-#### 2. Generate .exe
+Clone repo and run
 
-In the main.py directory run
-
+```sh
+git clone https://github.com/09jayy/Sudoku-Solver-with-GUI
+cd Sudoku-Solver-with-GUI
+python main.py
 ```
-pyinstaller --onefile --windowed --icon=sudokuIcon.ico --add-data "sudokuIcon.ico;." main.py
-```
-
-In the `/dist` folder will be the `main.exe` - May need to manually move the solveSudoku.ico file into the `/dist` folder for .exe to run
 
 ## Program Structure
 
